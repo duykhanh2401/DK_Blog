@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css?family=Ranga');
+body {
+	overflow: hidden;
+	user-select: none;
+}
+
+.room {
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	background: rgba(211, 31, 31, 0.3);
+}
+
+.cover {
+	background: rgba(0, 0, 0, 0.85);
+	height: 100%;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	position: absolute;
+	pointer-events: none;
+	animation: flicker 1.8s;
+	-webkit-animation: flicker 1.8s;
+}
+
+.fourofour,
+.errorDesc {
+	margin: 0px 0px;
+	font-family: 'Ranga', sans-serif;
+}
+
+.fourofour {
+	font-size: 10em;
+	display: inline-block;
+}
+
+.errorDesc {
+	text-align: center;
+	font-size: 4em;
+}
+
+.middle {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.ghost {
+	min-height: 150px;
+	max-width: 130px;
+	margin: 0px 25px;
+	animation: ghostly 3s ease-out infinite;
+	-webkit-animation: ghostly 3s ease-out infinite;
+}
+
+@keyframes ghostly {
+	0% {
+		transform: translate(0, 0px);
+	}
+	50% {
+		transform: translate(0, 25px);
+	}
+	100% {
+		transform: translate(0, 0px);
+	}
+}
+
+@keyframes flicker {
+	0% {
+		background: rgba(0, 0, 0, 0.85);
+		opacity: 1;
+	}
+	5% {
+		background: rgba(0, 0, 0, 0.65);
+	}
+	10% {
+		background: rgba(0, 0, 0, 0.85);
+	}
+	15% {
+		background: rgba(0, 0, 0, 0.65);
+	}
+	20% {
+		background: rgba(0, 0, 0, 0.85);
+	}
+	40% {
+		background: rgba(0, 0, 0, 0.85);
+	}
+	45% {
+		background: rgba(0, 0, 0, 0.65);
+	}
+	50% {
+		background: rgba(0, 0, 0, 0.85);
+	}
+	65% {
+		background: rgba(0, 0, 0, 0.85);
+	}
+	70% {
+		background: rgba(0, 0, 0, 0.65);
+	}
+	75% {
+		background: rgba(0, 0, 0, 0.85);
+	}
+	80% {
+		background: rgba(0, 0, 0, 0.65);
+	}
+	95% {
+		background: rgba(0, 0, 0, 0.65);
+	}
+	100% {
+		background: rgba(0, 0, 0, 0.85);
+		opacity: 1;
+	}
+}
