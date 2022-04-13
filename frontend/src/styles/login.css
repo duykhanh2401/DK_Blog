@@ -38,36 +38,7 @@
 
 /* helpers/icon.css */
 
-:root {
-	--iconFill: var(--baseColor);
-}
-
-.icons {
-	display: none;
-}
-
-.icon {
-	height: 1em;
-	display: inline-block;
-	fill: #606468;
-	fill: var(--iconFill);
-	width: 1em;
-	vertical-align: middle;
-}
-
 /* layout/base.css */
-
-:root {
-	--htmlFontSize: 100%;
-
-	--bodyBackgroundColor: #2c3338;
-	--bodyColor: var(--baseColor);
-	--bodyFontFamily: 'Open Sans';
-	--bodyFontFamilyFallback: sans-serif;
-	--bodyFontSize: 0.875rem;
-	--bodyFontWeight: 400;
-	--bodyLineHeight: 1.5;
-}
 
 * {
 	-webkit-box-sizing: inherit;
@@ -99,22 +70,6 @@ html {
 } */
 
 /* modules/anchor.css */
-
-:root {
-	--anchorColor: #eee;
-}
-
-a {
-	color: #eee;
-	color: var(--anchorColor);
-	outline: 0;
-	text-decoration: none;
-}
-
-a:focus,
-a:hover {
-	text-decoration: underline;
-}
 
 /* modules/form.css */
 

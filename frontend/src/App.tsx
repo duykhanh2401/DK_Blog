@@ -8,14 +8,18 @@ function App() {
 	return (
 		<div className="App">
 			<Header />
-			<SideBar />
-			<Router>
-				<Routes>
-					<Route path="/" element={<PageRender />} />
-					<Route path="/:page" element={<PageRender />} />
-					<Route path="/:page/:slug" element={<PageRender />} />
-				</Routes>
-			</Router>
+			<div className="container">
+				<SideBar />
+				<div className="main">
+					<Router>
+						<Routes>
+							<Route path="/" element={<PageRender />} />
+							<Route path="/:page" element={<PageRender />} />
+							<Route path="/:page/:slug" element={<PageRender />} />
+						</Routes>
+					</Router>
+				</div>
+			</div>
 		</div>
 	);
 }

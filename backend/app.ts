@@ -28,7 +28,6 @@ app.use('/api/auth', authRoutes);
 app.get('/', (req, res) => {
 	res.json({ message: 'Hello' });
 });
-
 app.all('*', (req, res, next) => {
 	next(new AppError(`Can't find ${req.originalUrl} on server !!`, 400));
 });

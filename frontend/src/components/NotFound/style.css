@@ -34,6 +34,7 @@ body {
 .fourofour {
 	font-size: 10em;
 	display: inline-block;
+	/* color: var(--body-color); */
 }
 
 .errorDesc {

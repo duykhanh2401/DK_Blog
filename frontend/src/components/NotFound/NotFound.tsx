@@ -35,7 +35,7 @@ const NotFound = () => {
 				<circle fill="black" cx="47.8" cy="18" r="4"></circle>
 			</svg>
 			<h1 className="fourofour right center">4</h1>
-			<h3 className="errorDesc center">I Think You May Be Lost...</h3>
+			<h3 className="errorDesc center">Page Not Found</h3>
 		</div>
 	);
 };
