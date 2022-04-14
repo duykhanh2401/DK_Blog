@@ -1,5 +1,5 @@
-import { Document } from 'mongoose';
-
+import mongoose, { Document } from 'mongoose';
+import { Request } from 'express';
 export interface IUser extends Document {
 	name: string;
 	email: string;
@@ -20,4 +20,24 @@ export interface IDecodedToken {
 	iat: number;
 	exp: number;
 	id?: string;
+}
+
+export interface ICategory extends Document {
+	name: string;
+	slug: string;
+	createdAt?: Date;
+}
+
+export interface IReqAuth extends Request {
+	user?: IUser;
+}
+
+export interface IBlog extends Document {
+	user?: mongoose.Types.ObjectId;
+	title: string;
+	content: string;
+	thumbnail: string;
+	slug: string;
+	category?: mongoose.Types.ObjectId;
+	createdAt?: Date;
 }

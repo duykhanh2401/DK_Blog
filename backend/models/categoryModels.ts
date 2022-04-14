@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
-
-const categorySchema = new mongoose.Schema(
+import { ICategory } from '../config/interface';
+const slug = require('mongoose-slug-generator');
+mongoose.plugin(slug);
+const categorySchema = new mongoose.Schema<ICategory>(
 	{
 		name: {
 			type: String,
@@ -9,6 +11,7 @@ const categorySchema = new mongoose.Schema(
 			unique: true,
 		},
 		createdAt: { type: Date, default: Date.now() },
+		slug: { type: String, slug: 'name', unique: true },
 	},
 	{
 		toJSON: { virtuals: true },
@@ -16,4 +19,4 @@ const categorySchema = new mongoose.Schema(
 	},
 );
 
-export default mongoose.model('Category', categorySchema);
+export default mongoose.model<ICategory>('Category', categorySchema);

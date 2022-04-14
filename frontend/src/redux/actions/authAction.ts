@@ -1,3 +1,3 @@
-const {Dispatch} from 'redux'
+import { Dispatch } from 'redux';
 
-import {AUTH, IAuth} from '../types/globalTypes'
+import { AUTH, IAuthType } from '../types/globalTypes';

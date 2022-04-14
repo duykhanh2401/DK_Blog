@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import { AppError } from '../utils/AppError';
 import { promisify } from 'util';
 import User from '../models/userModels';
-import { IUser, IDecodedToken } from '../config/interface';
+import { IUser, IDecodedToken, IReqAuth } from '../config/interface';
 import bcrypt from 'bcrypt';
 
 const createToken = (username: string) => {
@@ -82,7 +82,7 @@ export const logout = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export const protect = catchAsync(
-	async (req: Request, res: Response, next: NextFunction) => {
+	async (req: IReqAuth, res: Response, next: NextFunction) => {
 		let token;
 		if (
 			req.headers.authorization &&
@@ -124,6 +124,7 @@ export const protect = catchAsync(
 		// 		),
 		// 	);
 		// }
+		req.user = currentUser;
 		res.locals.user = currentUser;
 		next();
 	},
