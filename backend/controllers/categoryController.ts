@@ -24,11 +24,18 @@ export const updateCategory = catchAsync(
 			return next(new AppError('Danh mục không tồn tại', 400));
 		}
 		const slug = getSlug(req.body.name);
-		const result = await Categories.findByIdAndUpdate(req.params.id, {
-			name: req.body.name,
-			slug,
-		});
-
+		const result = await Categories.findByIdAndUpdate(
+			req.params.id,
+			{
+				name: req.body.name,
+				slug,
+			},
+			{
+				new: true,
+				runValidators: true,
+			},
+		);
+		console.log(result);
 		res.status(200).json({
 			data: result,
 		});

@@ -1,30 +1,30 @@
 import { Router } from 'express';
-import * as categoryController from '../controllers/categoryController';
+import * as blogController from '../controllers/blogController';
 import * as authController from '../controllers/authController';
 
 const router = Router();
 
 router
 	.route('/')
-	.get(categoryController.getAllCategory)
+	.get(blogController.getAllBlog)
 	.post(
 		authController.protect,
 		authController.restrictTo('admin'),
-		categoryController.createCategory,
+		blogController.createBlog,
 	);
 
 router
 	.route('/:id')
-	.get(categoryController.getCategory)
+	.get(blogController.getBlog)
 	.patch(
 		authController.protect,
 		authController.restrictTo('admin'),
-		categoryController.updateCategory,
+		blogController.updateBlog,
 	)
 	.delete(
 		authController.protect,
 		authController.restrictTo('admin'),
-		categoryController.deleteCategory,
+		blogController.deleteBlog,
 	);
 
 export default router;

@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
 import { xssFilter } from 'helmet';
 import authRoutes from './routes/authRoutes';
+import categoryRoutes from './routes/categoriesRoutes';
 
 import globalErrorHandler from './controllers/errorController';
 import { AppError } from './utils/AppError';
@@ -25,6 +26,7 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 app.use('/api/auth', authRoutes);
+app.use('/api/category', categoryRoutes);
 app.get('/', (req, res) => {
 	res.json({ message: 'Hello' });
 });

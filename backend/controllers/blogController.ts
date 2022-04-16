@@ -35,13 +35,13 @@ export const updateBlog = catchAsync(
 
 export const getBlog = catchAsync(
 	async (req: Request, res: Response, next: NextFunction) => {
-		const Blog = await Blog.findById(req.params.id);
-		if (!Blog) {
+		const blog = await Blog.findById(req.params.id);
+		if (!blog) {
 			return next(new AppError('Danh mục không tồn tại', 400));
 		}
 
 		res.status(200).json({
-			data: Blog,
+			data: blog,
 		});
 	},
 );

@@ -7,14 +7,14 @@ import User from '../models/userModels';
 import { IUser, IDecodedToken, IReqAuth } from '../config/interface';
 import bcrypt from 'bcrypt';
 
-const createToken = (username: string) => {
-	return jwt.sign({ username }, `${process.env.JWT_SECRET}`, {
+const createToken = (id: string) => {
+	return jwt.sign({ id }, `${process.env.JWT_SECRET}`, {
 		expiresIn: process.env.JWT_EXPIRES_IN,
 	});
 };
 
 const createAndSendToken = (user: IUser, statusCode: number, res: Response) => {
-	const token = createToken(user.email);
+	const token = createToken(user.id);
 
 	res.cookie('jwt', token, {
 		httpOnly: true,
@@ -30,6 +30,9 @@ const createAndSendToken = (user: IUser, statusCode: number, res: Response) => {
 
 export const register = catchAsync(
 	async (req: Request, res: Response, next: NextFunction) => {
+		if (!req.body.password) {
+			return next(new AppError('Vui lòng nhập mật khẩu', 400));
+		}
 		if (req.body.password !== req.body.passwordConfirm) {
 			return next(new AppError('Mật khẩu không giống nhau', 400));
 		}
@@ -107,12 +110,7 @@ export const protect = catchAsync(
 		// Check if user still exists || Kiểm tra người dùng tồn tại hay k
 		const currentUser = await User.findById(decode.id);
 		if (!currentUser) {
-			return next(
-				new AppError(
-					'The user belonging to this token does no longer exists',
-					401,
-				),
-			);
+			return next(new AppError('Token cho người dùng không tồn tại', 401));
 		}
 
 		// Kiểm tra người dùng thay đổi mật khẩu sau khi token được tạo
@@ -129,3 +127,20 @@ export const protect = catchAsync(
 		next();
 	},
 );
+
+export const restrictTo = (...role: string[]) => {
+	return (req: IReqAuth, res: Response, next: NextFunction) => {
+		if (!req.user) {
+			return next(
+				new AppError('Bạn không có quyền truy cập đường dẫn này', 400),
+			);
+		}
+
+		if (!role.includes(req.user.role)) {
+			return next(
+				new AppError('Bạn không có quyền truy cập đường dẫn này', 400),
+			);
+		}
+		next();
+	};
+};
