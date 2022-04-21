@@ -45,7 +45,22 @@ body {
 	transition: all 0.3s ease;
 }
 
+@media screen and (max-width: 768px) {
+	.main {
+		margin: 70px 0 0 0 !important;
+		padding: 0 20px;
+	}
+}
+
+.blog-posts {
+	display: flex;
+	flex-wrap: wrap;
+	max-width: 1024px;
+	margin: 0 auto;
+}
+
 /* ------------------------------Login---------------------------------- */
 @import url('./sidebar.css');
 @import url('./header.css');
 @import url('./login.css');
+@import url('./card.css');

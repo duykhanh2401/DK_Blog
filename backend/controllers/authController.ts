@@ -4,9 +4,8 @@ import jwt from 'jsonwebtoken';
 import { AppError } from '../utils/AppError';
 import { promisify } from 'util';
 import User from '../models/userModels';
-import { IUser, IDecodedToken, IReqAuth } from '../config/interface';
 import bcrypt from 'bcrypt';
-
+import { IReqAuth, IDecodedToken, IUser } from './../config/interface';
 const createToken = (id: string) => {
 	return jwt.sign({ id }, `${process.env.JWT_SECRET}`, {
 		expiresIn: process.env.JWT_EXPIRES_IN,
