@@ -12,6 +12,18 @@ const createToken = (id: string) => {
 	});
 };
 
+const createRefreshToken = (id: string) => {
+	return jwt.sign({ id }, `${process.env.JWT_REFRESH_TOKEN_SECRET}`, {
+		expiresIn: process.env.JWT_REFRESH_TOKEN_EXPIRES_IN,
+	});
+};
+
+const createAccessToken = (id: string) => {
+	return jwt.sign({ id }, `${process.env.JWT_ACCESS_TOKEN_SECRET}`, {
+		expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRES_IN,
+	});
+};
+
 const createAndSendToken = (user: IUser, statusCode: number, res: Response) => {
 	const token = createToken(user.id);
 
@@ -68,19 +80,49 @@ export const login = catchAsync(
 		if (!isMatch) {
 			return next(new AppError('Mật khẩu không đúng', 400));
 		}
-		createAndSendToken(user, 200, res);
+
+		const accessToken = await createAccessToken(user.id);
+		const refreshToken = await createRefreshToken(user.id);
+		res.cookie('refreshToken', refreshToken, {
+			httpOnly: true,
+			path: '/api/refreshToken',
+			maxAge: 30 * 24 * 60 * 60 * 1000,
+		});
+
+		res.json({
+			message: 'Đăng nhập thành công ',
+			accessToken,
+			user: { ...user._doc, password: '' },
+		});
+	},
+);
+
+export const refreshToken = catchAsync(
+	async (req: Request, res: Response, next: NextFunction) => {
+		const refreshToken = req.cookies.refreshToken;
+		if (refreshToken) {
+			return next(new AppError('Vui lòng đăng nhập', 400));
+		}
+
+		const decode = <IDecodedToken>(
+			jwt.verify(refreshToken, `${process.env.JWT_REFRESH_TOKEN_SECRET}`)
+		);
+
+		const user = await User.findById(decode.id);
+		if (!user) {
+			return next(new AppError('Token cho người dùng không tồn tại', 401));
+		}
+
+		const accessToken = createAccessToken(user.id);
+		res.json({ accessToken });
 	},
 );
 
 export const logout = (req: Request, res: Response, next: NextFunction) => {
-	res.cookie('jwt', 'logOutToken', {
-		httpOnly: true,
-		expires: new Date(Date.now() + 5000),
+	res.clearCookie('refreshToken', {
+		path: `/api/refreshToken`,
 	});
-
-	res.status(200).json({
-		status: 'success',
-	});
+	res.json({ message: 'Đăng xuất thành công' });
 };
 
 export const protect = catchAsync(

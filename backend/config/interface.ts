@@ -6,6 +6,7 @@ export interface IUser extends Document {
 	password: string;
 	role: string;
 	createdAt?: Date;
+	_doc?: object;
 }
 
 export interface INewUser {

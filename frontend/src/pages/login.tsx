@@ -1,66 +1,85 @@
 import React, { useState } from 'react';
-import { Person, Lock } from '@mui/icons-material';
-import { InputChange } from '../utils/TypeScript';
+import { useDispatch } from 'react-redux';
+import { FormSubmit, InputChange } from '../utils/TypeScript';
+import { login } from './../redux/actions/authAction';
+import PersonIcon from '@mui/icons-material/Person';
+import LockIcon from '@mui/icons-material/Lock';
+import Alert from '../components/alert/Alert';
 const Login = () => {
 	const initialState = { email: '', password: '' };
 	const [userLogin, setUserLogin] = useState(initialState);
 	const { email, password } = userLogin;
-	const submitHandler = (event: any) => {
-		event.preventDefault();
+	const dispatch = useDispatch();
+
+	const [onFocusEmail, setFocusEmail] = useState(false);
+	const toggleFocusEmail = () => {
+		if (onFocusEmail) {
+			console.log(email === '');
+			if (email === '') {
+				setFocusEmail(false);
+			}
+		} else {
+			setFocusEmail(true);
+		}
+	};
+	const [onFocusPassword, setFocusPassword] = useState(false);
+	const toggleFocusPassword = () => {
+		if (onFocusPassword) {
+			console.log(email === '');
+			if (password === '') {
+				setFocusPassword(false);
+			}
+		} else {
+			setFocusPassword(true);
+		}
+	};
+	const handleChangeInput = (e: InputChange) => {
+		const { value, type } = e.target;
+		setUserLogin({ ...userLogin, [type]: value });
 	};
 
-	const handleChangeInput = (e: InputChange) => {
-		const { value, name } = e.target;
-		setUserLogin({ ...userLogin, [name]: value });
+	const handleSubmit = (e: FormSubmit) => {
+		e.preventDefault();
+		dispatch(login(userLogin));
 	};
 	return (
-		<div>
-			<div className="grid">
-				<form
-					action="https://httpbin.org/post"
-					method="POST"
-					className="form login"
-					onSubmit={submitHandler}
-				>
-					<div className="form__field">
-						<label htmlFor="login__username">
-							<Person />
-							<span className="hidden">Username</span>
-						</label>
-						<input
-							autoComplete="username"
-							id="login__username"
-							type="emal"
-							name="email"
-							className="form__input"
-							placeholder="Username"
-							required
-							onChange={handleChangeInput}
-						/>
-					</div>
-
-					<div className="form__field">
-						<label htmlFor="login__password">
-							<Lock />
-							<span className="hidden">Password</span>
-						</label>
-						<input
-							id="login__password"
-							type="password"
-							name="password"
-							className="form__input"
-							placeholder="Password"
-							required
-							onChange={handleChangeInput}
-						/>
-					</div>
-
-					<div className="form__field">
-						<input type="submit" value="Sign In" />
-					</div>
-				</form>
+		<form onSubmit={handleSubmit} className="form-login" autoComplete="off">
+			<div className={`input-div one ${onFocusEmail ? 'focus' : ''}`}>
+				<div className="i">
+					<PersonIcon />
+				</div>
+				<div className="div">
+					<h5>Email</h5>
+					<input
+						type="email"
+						className="input"
+						onFocus={toggleFocusEmail}
+						onBlur={toggleFocusEmail}
+						autoComplete="new-password"
+						onChange={handleChangeInput}
+						required
+					/>
+				</div>
 			</div>
-		</div>
+			<div className={`input-div pass ${onFocusPassword ? 'focus' : ''}`}>
+				<div className="i">
+					<LockIcon />
+				</div>
+				<div className="div">
+					<h5>Mật khẩu</h5>
+					<input
+						onChange={handleChangeInput}
+						onFocus={toggleFocusPassword}
+						onBlur={toggleFocusPassword}
+						type="password"
+						className="input"
+						autoComplete="new-password"
+						required
+					/>
+				</div>
+			</div>
+			<input type="submit" className="btn" value="Login" />
+		</form>
 	);
 };
 
