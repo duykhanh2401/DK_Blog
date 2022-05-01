@@ -27,6 +27,7 @@ export interface ICategory extends Document {
 	name: string;
 	slug: string;
 	createdAt?: Date;
+	privacy: string;
 }
 
 export interface IReqAuth extends Request {

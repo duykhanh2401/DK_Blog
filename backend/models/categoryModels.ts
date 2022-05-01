@@ -6,9 +6,14 @@ const categorySchema = new mongoose.Schema<ICategory>(
 	{
 		name: {
 			type: String,
-			required: true,
+			required: [true, 'Vui lòng nhập tên danh mục'],
 			trim: true,
 			unique: true,
+		},
+		privacy: {
+			type: String,
+			enum: ['public', 'private'],
+			required: true,
 		},
 		createdAt: { type: Date, default: Date.now() },
 		slug: { type: String, slug: 'name', unique: true },

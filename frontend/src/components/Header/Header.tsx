@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Search from './Search';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
 	// header-toggle
@@ -20,7 +21,6 @@ const Header = () => {
 	}
 	const setOpenSideBar = () => {
 		const sideBar = document.querySelector('.sidebar');
-		console.log(sideBar);
 		sideBar?.classList.toggle('close');
 	};
 	return (
@@ -60,9 +60,9 @@ const Header = () => {
 							/>
 						</svg>
 					</div>
-					<a href="/" className="header__logo">
+					<NavLink to="/" className="header__logo">
 						Lucifer Blog
-					</a>
+					</NavLink>
 				</div>
 				<div className="header__search">
 					<Search />

@@ -8,6 +8,6 @@ export interface IAuthType {
 }
 
 export interface IAuth {
-	token?: string;
+	accessToken?: string;
 	user?: IUser;
 }

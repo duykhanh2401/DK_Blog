@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { FormSubmit, InputChange } from '../utils/TypeScript';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { FormSubmit, InputChange, RootStore } from '../utils/TypeScript';
 import { login } from './../redux/actions/authAction';
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
 import Alert from '../components/alert/Alert';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
+	const history = useNavigate();
+	const { auth } = useSelector((state: RootStore) => state);
+
+	useEffect(() => {
+		if (auth.accessToken) {
+			history('/');
+		}
+	}, [auth.accessToken, history]);
 	const initialState = { email: '', password: '' };
 	const [userLogin, setUserLogin] = useState(initialState);
 	const { email, password } = userLogin;
@@ -14,7 +23,6 @@ const Login = () => {
 	const [onFocusEmail, setFocusEmail] = useState(false);
 	const toggleFocusEmail = () => {
 		if (onFocusEmail) {
-			console.log(email === '');
 			if (email === '') {
 				setFocusEmail(false);
 			}
@@ -25,7 +33,6 @@ const Login = () => {
 	const [onFocusPassword, setFocusPassword] = useState(false);
 	const toggleFocusPassword = () => {
 		if (onFocusPassword) {
-			console.log(email === '');
 			if (password === '') {
 				setFocusPassword(false);
 			}
@@ -78,7 +85,7 @@ const Login = () => {
 					/>
 				</div>
 			</div>
-			<input type="submit" className="btn" value="Login" />
+			<input type="submit" className="btn-login" value="Login" />
 		</form>
 	);
 };

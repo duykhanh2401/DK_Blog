@@ -11,9 +11,10 @@ import categoryRoutes from './routes/categoriesRoutes';
 import globalErrorHandler from './controllers/errorController';
 import { AppError } from './utils/AppError';
 const app = express();
-if (process.env.NODE_ENV === 'development') {
-	app.use(morgan('dev'));
-}
+console.log(process.env.NODE_ENV);
+
+app.use(morgan('dev'));
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(ExpressMongoSanitize());

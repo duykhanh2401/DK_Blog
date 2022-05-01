@@ -26,23 +26,23 @@
 	height: 100px;
 }
 
-.right {
+.right-alert {
 	background: #e79c10;
 	transform: rotate(-30deg) skewX(-30deg) translate(49px, 65px) scaleY(0.86);
 }
 
-.left {
+.left-alert {
 	background: #d53a33;
 	transform: rotate(90deg) skewX(-30deg) scaleY(0.86) translate(25px, -50px);
 }
 
-.top {
+.top-alert {
 	background: #1d9099;
 	transform: rotate(210deg) skew(-30deg) translate(-75px, -22px) scaleY(0.86);
 	z-index: 2;
 }
 
-.face {
+.face-alert {
 	height: 50px;
 	width: 50px;
 	position: absolute;

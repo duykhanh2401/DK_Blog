@@ -83,10 +83,10 @@ export const login = catchAsync(
 
 		const accessToken = await createAccessToken(user.id);
 		const refreshToken = await createRefreshToken(user.id);
-		res.cookie('refreshToken', refreshToken, {
+		res.cookie('refresh_token', refreshToken, {
 			httpOnly: true,
-			path: '/api/refreshToken',
 			maxAge: 30 * 24 * 60 * 60 * 1000,
+			expires: new Date(Date.now() + 60 * 24 * 60 * 1000 * 1000),
 		});
 
 		res.json({
@@ -99,11 +99,10 @@ export const login = catchAsync(
 
 export const refreshToken = catchAsync(
 	async (req: Request, res: Response, next: NextFunction) => {
-		const refreshToken = req.cookies.refreshToken;
-		if (refreshToken) {
+		const refreshToken = req.cookies.refresh_token;
+		if (!refreshToken) {
 			return next(new AppError('Vui lòng đăng nhập', 400));
 		}
-
 		const decode = <IDecodedToken>(
 			jwt.verify(refreshToken, `${process.env.JWT_REFRESH_TOKEN_SECRET}`)
 		);
@@ -114,13 +113,13 @@ export const refreshToken = catchAsync(
 		}
 
 		const accessToken = createAccessToken(user.id);
-		res.json({ accessToken });
+		res.json({ accessToken, user });
 	},
 );
 
 export const logout = (req: Request, res: Response, next: NextFunction) => {
-	res.clearCookie('refreshToken', {
-		path: `/api/refreshToken`,
+	res.clearCookie('refresh_token', {
+		path: `/api/refresh_token`,
 	});
 	res.json({ message: 'Đăng xuất thành công' });
 };
@@ -128,6 +127,7 @@ export const logout = (req: Request, res: Response, next: NextFunction) => {
 export const protect = catchAsync(
 	async (req: IReqAuth, res: Response, next: NextFunction) => {
 		let token;
+		console.log(req.headers);
 		if (
 			req.headers.authorization &&
 			req.headers.authorization.startsWith('Bearer ')
@@ -136,22 +136,18 @@ export const protect = catchAsync(
 		} else if (req.cookies.jwt) {
 			token = req.cookies.jwt;
 		}
-
-		if (!token)
-			return next(
-				new AppError('Bạn chưa đăng nhập. Vui lòng đăng nhập !', 401),
-			);
+		if (!token || token === 'undefined') return next();
 
 		// Verification token
 
 		const decode = await (<IDecodedToken>(
-			jwt.verify(token, `${process.env.JWT_SECRET}`)
+			jwt.verify(token, `${process.env.JWT_ACCESS_TOKEN_SECRET}`)
 		));
 
 		// Check if user still exists || Kiểm tra người dùng tồn tại hay k
 		const currentUser = await User.findById(decode.id);
 		if (!currentUser) {
-			return next(new AppError('Token cho người dùng không tồn tại', 401));
+			return next();
 		}
 
 		// Kiểm tra người dùng thay đổi mật khẩu sau khi token được tạo

@@ -4,27 +4,16 @@ import * as authController from '../controllers/authController';
 
 const router = Router();
 
+router.use(authController.protect);
 router
 	.route('/')
 	.get(blogController.getAllBlog)
-	.post(
-		authController.protect,
-		authController.restrictTo('admin'),
-		blogController.createBlog,
-	);
+	.post(blogController.createBlog);
 
 router
 	.route('/:id')
 	.get(blogController.getBlog)
-	.patch(
-		authController.protect,
-		authController.restrictTo('admin'),
-		blogController.updateBlog,
-	)
-	.delete(
-		authController.protect,
-		authController.restrictTo('admin'),
-		blogController.deleteBlog,
-	);
+	.patch(authController.restrictTo('admin'), blogController.updateBlog)
+	.delete(authController.restrictTo('admin'), blogController.deleteBlog);
 
 export default router;

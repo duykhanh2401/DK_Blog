@@ -1,15 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 import { catchAsync } from '../utils/catchAsync';
 import Categories from '../models/categoryModels';
-import { ICategory } from '../config/interface';
+import { ICategory, IReqAuth } from '../config/interface';
 import { AppError } from '../utils/AppError';
-import { resolveSoa } from 'dns';
 const getSlug = require('speakingurl');
 
 export const createCategory = catchAsync(
-	async (req: Request, res: Response, next: NextFunction) => {
-		const { name } = req.body;
-		const newCategory = await Categories.create({ name });
+	async (req: IReqAuth, res: Response, next: NextFunction) => {
+		const { name, privacy } = req.body;
+		const newCategory = await Categories.create({ name, privacy });
 
 		res.status(200).json({
 			category: newCategory,
@@ -18,7 +17,7 @@ export const createCategory = catchAsync(
 );
 
 export const updateCategory = catchAsync(
-	async (req: Request, res: Response, next: NextFunction) => {
+	async (req: IReqAuth, res: Response, next: NextFunction) => {
 		const category = await Categories.findById(req.params.id);
 		if (!category) {
 			return next(new AppError('Danh mục không tồn tại', 400));
@@ -29,13 +28,13 @@ export const updateCategory = catchAsync(
 			{
 				name: req.body.name,
 				slug,
+				privacy: req.body.privacy,
 			},
 			{
 				new: true,
 				runValidators: true,
 			},
 		);
-		console.log(result);
 		res.status(200).json({
 			data: result,
 		});
@@ -43,8 +42,17 @@ export const updateCategory = catchAsync(
 );
 
 export const getCategory = catchAsync(
-	async (req: Request, res: Response, next: NextFunction) => {
-		const category = await Categories.findById(req.params.id);
+	async (req: IReqAuth, res: Response, next: NextFunction) => {
+		let categoryQuery;
+		if (!req.user) {
+			categoryQuery = Categories.findById(req.params.id).find({
+				isAdmin: { $ne: true },
+			});
+		} else {
+			categoryQuery = Categories.findById(req.params.id);
+		}
+
+		const category = await categoryQuery;
 		if (!category) {
 			return next(new AppError('Danh mục không tồn tại', 400));
 		}
@@ -56,8 +64,14 @@ export const getCategory = catchAsync(
 );
 
 export const getAllCategory = catchAsync(
-	async (req: Request, res: Response, next: NextFunction) => {
-		const getAllCategory = await Categories.find();
+	async (req: IReqAuth, res: Response, next: NextFunction) => {
+		let categoryQuery;
+		if (!req.user) {
+			categoryQuery = Categories.find({ privacy: { $ne: 'private' } });
+		} else {
+			categoryQuery = Categories.find();
+		}
+		const getAllCategory = await categoryQuery;
 		res.status(200).json({
 			data: getAllCategory,
 		});

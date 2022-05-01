@@ -15,12 +15,14 @@
 
 :root {
 	/* ===== Colors ===== */
-	--body-color: #e4e9f7;
-	--sidebar-color: #fff;
-	--primary-color: #695cfe;
-	--primary-color-light: #f6f5ff;
+	--body-color: #48525c;
+	--body-background: #fafafc;
+
+	--sidebar-color: #fefefe;
+	--sidebar-text-color: #161617;
 	--toggle-color: #ddd;
-	--text-color: #707070;
+	--sidebar-hover-color: #efefef;
+	--sidebar-hover-text-color: #1a1d1f;
 
 	/* ====== Transition ====== */
 	--tran-03: all 0.2s ease;
@@ -30,10 +32,20 @@
 
 	--header-height: 3.5rem;
 }
+body.dark {
+	--body-color: #fefefe;
+	--body-background: #1e1e1e;
 
+	--sidebar-color: #2d2d30;
+	--sidebar-text-color: #fbfbfb;
+	--toggle-color: #fff;
+	--sidebar-hover-color: #272b30;
+	--sidebar-hover-text-color: #fcfcfc;
+}
 body {
 	min-height: 100vh;
-	background-color: var(--body-color);
+	background-color: var(--body-background);
+	color: var(--body-color);
 	transition: var(--tran-05);
 }
 .sidebar.close ~ .main {
@@ -64,3 +76,4 @@ body {
 @import url('./header.css');
 @import url('./login.css');
 @import url('./card.css');
+@import url('./admin/category.css');
