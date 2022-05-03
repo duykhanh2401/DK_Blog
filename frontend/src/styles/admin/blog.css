@@ -1,0 +1,20 @@
+.blog-body {
+	display: flex;
+}
+
+.body-left {
+	flex: 1;
+}
+
+.body-right {
+	flex: 1;
+}
+
+.body-right .post-cart {
+	width: 50%;
+	margin: 0 auto;
+}
+
+.body-right .post-title a {
+	color: var(--body-color);
+}

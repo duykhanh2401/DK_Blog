@@ -13,7 +13,7 @@ router
 router
 	.route('/:id')
 	.get(blogController.getBlog)
-	.patch(authController.restrictTo('admin'), blogController.updateBlog)
-	.delete(authController.restrictTo('admin'), blogController.deleteBlog);
+	.patch(blogController.updateBlog)
+	.delete(blogController.deleteBlog);
 
 export default router;

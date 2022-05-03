@@ -6,11 +6,18 @@ const getSlug = require('speakingurl');
 
 export const createBlog = catchAsync(
 	async (req: Request, res: Response, next: NextFunction) => {
-		const { name } = req.body;
-		const newBlog = await Blog.create({ name });
-
+		const { name, title, content, thumbnail, category, user } = req.body;
+		console.log(req.body);
+		const newBlog = await Blog.create({
+			name,
+			title,
+			content,
+			thumbnail,
+			category,
+			user,
+		});
 		res.status(200).json({
-			Blog: newBlog,
+			blog: newBlog,
 		});
 	},
 );
@@ -21,9 +28,9 @@ export const updateBlog = catchAsync(
 		if (!blog) {
 			return next(new AppError('Danh mục không tồn tại', 400));
 		}
-		const slug = getSlug(req.body.name);
+		const slug = getSlug(req.body.title);
 		const result = await Blog.findByIdAndUpdate(req.params.id, {
-			name: req.body.name,
+			...req.body,
 			slug,
 		});
 

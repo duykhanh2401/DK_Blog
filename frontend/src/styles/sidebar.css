@@ -16,6 +16,7 @@
 	margin-top: 40px;
 	transition: 0.4s;
 	padding: 10px 14px;
+	box-shadow: 0 6px 18px 0 rgb(30 30 30 / 4%);
 }
 
 /* ===== Reusable code - Here ===== */
@@ -137,13 +138,6 @@ body.dark .home .text {
 }
 
 /* Google Fonts Import Link */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: 'Poppins', sans-serif;
-}
 
 .sidebar.close {
 	width: 78px;
@@ -224,7 +218,7 @@ body.dark .home .text {
 	align-items: center;
 	text-decoration: none;
 }
-.sidebar .nav-links li a .link_name {
+.sidebar .nav-links li .link_name {
 	max-width: 100px;
 	font-size: 14px;
 	font-weight: 400;
@@ -235,7 +229,7 @@ body.dark .home .text {
 	text-overflow: ellipsis;
 }
 
-.sidebar .nav-links li:hover a .link_name,
+.sidebar .nav-links li:hover .link_name,
 .sidebar .nav-links li:hover a i {
 	color: var(--sidebar-hover-text-color);
 }
@@ -437,7 +431,7 @@ body.dark .home .text {
 	.sidebar {
 		left: 0;
 	}
-	.sidebar.close .nav-links li a .link_name {
+	.sidebar.close .nav-links li .link_name {
 		pointer-events: none;
 		display: none;
 	}

@@ -19,6 +19,7 @@ export interface IUser {
 	email: string;
 	name: string;
 	role: string;
+	_id: string;
 }
 export interface IAuth {
 	token: string;
@@ -36,5 +37,16 @@ export interface ICategory {
 	name: string;
 	createdAt: Date;
 	privacy: string;
+	slug: string;
+}
+
+export interface IBlog {
+	_id: string;
+	user: string | IUser;
+	title: string;
+	content: string;
+	thumbnail: string | File;
+	category: string;
+	createdAt: string;
 	slug: string;
 }

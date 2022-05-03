@@ -12,7 +12,7 @@ import PageRender from './PageRender';
 import PageRenderAdmin from './PageRenderAdmin';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import 'react-markdown-editor-lite/lib/index.css';
 import { refreshToken } from './redux/actions/authAction';
 
 import './styles/index.css';
@@ -20,12 +20,14 @@ import Alert from './components/alert/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategories } from './redux/actions/categoryAction';
 import { RootStore } from './utils/TypeScript';
+import { getBlogs } from './redux/actions/blogAction';
 function App() {
 	const dispatch = useDispatch();
 	const { auth } = useSelector((state: RootStore) => state);
 	useEffect(() => {
 		dispatch(refreshToken());
 		dispatch(getCategories(auth.accessToken));
+		dispatch(getBlogs());
 	}, [auth.accessToken, dispatch]);
 
 	return (

@@ -19,13 +19,13 @@ const blogSchema = new mongoose.Schema<IBlog>(
 			required: true,
 		},
 		thumbnail: String,
-		slug: { type: String, slug: 'tile', unique: true },
+		slug: { type: String, slug: 'title', unique: true },
 		category: {
 			type: mongoose.Types.ObjectId,
 			ref: 'Category',
 			required: true,
 		},
-		createdAt: Date.now(),
+		createdAt: { type: Date, default: Date.now() },
 	},
 	{
 		toJSON: { virtuals: true },

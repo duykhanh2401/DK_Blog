@@ -5,12 +5,11 @@
 	font-size: 100%;
 }
 /* Google Font Import - Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: 'Poppins', sans-serif;
+	/* font-family: 'Roboto', sans-serif; */
 }
 
 :root {
@@ -49,18 +48,17 @@ body {
 	transition: var(--tran-05);
 }
 .sidebar.close ~ .main {
-	margin: 70px 0 0 100px;
+	padding: 70px 0 0 100px;
 }
 
 .main {
-	margin: 70px 0 0 260px;
+	padding: 70px 0 0 260px;
 	transition: all 0.3s ease;
 }
 
 @media screen and (max-width: 768px) {
 	.main {
-		margin: 70px 0 0 0 !important;
-		padding: 0 20px;
+		padding: 70px 20px 0 !important;
 	}
 }
 
@@ -77,3 +75,5 @@ body {
 @import url('./login.css');
 @import url('./card.css');
 @import url('./admin/category.css');
+@import url('./admin/blog.css');
+@import url('./post.css');

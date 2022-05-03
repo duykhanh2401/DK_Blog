@@ -127,7 +127,6 @@ export const logout = (req: Request, res: Response, next: NextFunction) => {
 export const protect = catchAsync(
 	async (req: IReqAuth, res: Response, next: NextFunction) => {
 		let token;
-		console.log(req.headers);
 		if (
 			req.headers.authorization &&
 			req.headers.authorization.startsWith('Bearer ')

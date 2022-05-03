@@ -7,6 +7,7 @@ import ExpressMongoSanitize from 'express-mongo-sanitize';
 import { xssFilter } from 'helmet';
 import authRoutes from './routes/authRoutes';
 import categoryRoutes from './routes/categoriesRoutes';
+import blogRoutes from './routes/blogRoutes';
 
 import globalErrorHandler from './controllers/errorController';
 import { AppError } from './utils/AppError';
@@ -28,6 +29,7 @@ app.use('/api', limiter);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/category', categoryRoutes);
+app.use('/api/blog', blogRoutes);
 app.get('/', (req, res) => {
 	res.json({ message: 'Hello' });
 });
