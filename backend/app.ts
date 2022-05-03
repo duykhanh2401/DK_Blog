@@ -11,6 +11,7 @@ import blogRoutes from './routes/blogRoutes';
 
 import globalErrorHandler from './controllers/errorController';
 import { AppError } from './utils/AppError';
+import path from 'path';
 const app = express();
 console.log(process.env.NODE_ENV);
 
@@ -30,11 +31,10 @@ app.use('/api', limiter);
 app.use('/api/auth', authRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/blog', blogRoutes);
-app.get('/', (req, res) => {
-	res.json({ message: 'Hello' });
-});
-app.all('*', (req, res, next) => {
-	next(new AppError(`Can't find ${req.originalUrl} on server !!`, 400));
+
+app.use(express.static('frontend/build'));
+app.get('*', (req, res, next) => {
+	res.sendFile(path.join(__dirname, '../frontend', 'build', 'index.html'));
 });
 
 app.use(globalErrorHandler);
