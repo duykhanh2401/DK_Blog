@@ -9,7 +9,7 @@ export const login =
 	async (dispatch: Dispatch<IAuthType | IAlertType>) => {
 		try {
 			dispatch({ type: ALERT, payload: { loading: true } });
-			const res = await postAPI('/auth/login', userLogin);
+			const res = await postAPI('auth/login', userLogin);
 
 			dispatch({
 				type: AUTH,
