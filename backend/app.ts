@@ -33,9 +33,8 @@ app.use('/api/category', categoryRoutes);
 app.use('/api/blog', blogRoutes);
 
 app.use(express.static('frontend/build'));
-const root = path.join(__dirname, 'frontend', 'build');
 app.get('*', (req, res, next) => {
-	res.sendFile('index.html', { root });
+	res.sendFile(path.join(__dirname, '../frontend', 'build', 'index.html'));
 });
 
 app.use(globalErrorHandler);
