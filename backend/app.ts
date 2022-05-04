@@ -34,7 +34,7 @@ app.use('/api/blog', blogRoutes);
 
 app.use(express.static('frontend/build'));
 app.get('*', (req, res, next) => {
-	res.sendFile(path.join(__dirname, '../frontend/build', '/index.html'));
+	res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
 });
 
 app.use(globalErrorHandler);
