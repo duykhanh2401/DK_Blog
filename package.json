@@ -43,6 +43,7 @@
 		"prod": "SET NODE_ENV=production&& nodemon server.js",
 		"client": "yarn --cwd frontend start",
 		"admin": "yarn --cwd admin start",
-		"webpack": "webpack --watch --mode=development"
+		"webpack": "webpack --watch --mode=development",
+		"build": "tsc && cd frontend && yarn && yarn build"
 	}
 }
