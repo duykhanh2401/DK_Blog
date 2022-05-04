@@ -4,6 +4,7 @@ import NotFound from './components/NotFound/NotFound';
 import { IParams } from './utils/TypeScript';
 const generatePage = (name: string) => {
 	const component = () => require(`./pages/${name}`).default;
+	console.log(component);
 	try {
 		return React.createElement(component());
 	} catch (err) {
@@ -11,7 +12,10 @@ const generatePage = (name: string) => {
 	}
 };
 const PageRender = () => {
-	const { page, slug } = useParams();
+	let { page, slug } = useParams();
+	if (!page) {
+		page = 'index';
+	}
 	let name: string = '';
 
 	if (page) {

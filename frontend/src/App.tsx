@@ -45,7 +45,6 @@ function App() {
 							<Route path="/admin/:page/:slug" element={<PageRenderAdmin />} />
 							<Route path="/:page" element={<PageRender />} />
 							<Route path="/:page/:slug" element={<PageRender />} />
-							<Route path="/:admin/:page/:slug" element={<PageRender />} />
 						</Routes>
 					</div>
 				</Router>
