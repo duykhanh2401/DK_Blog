@@ -11,6 +11,7 @@ Dự án xây dựng website cá nhân với mục đích lưu trữ các bài v
 > - Sử dụng React Markdown-it
 > - Đang phát triển....
 
+## Demo https://blog.duykhanhdev.codes/
 
 ## Tác giả: Vũ Duy Khánh
 
@@ -47,7 +48,7 @@ yarn
 ## Một số hình ảnh của website
 
 Giao diện người dùng
-![](https://res.cloudinary.com/duykhanh2401/image/upload/v1651568336/Blog/Screenshot_2022-05-03_155831_ahh1e2.png)
+![](https://res.cloudinary.com/duykhanh2401/image/upload/v1651681227/Blog/Screenshot_2022-05-04_232014_xvy0p6.png)
 
 Giao diện quản trị viên
-![](https://res.cloudinary.com/duykhanh2401/image/upload/v1651568391/Blog/Screenshot_2022-05-03_155944_n5y5l5.png)
+![](https://res.cloudinary.com/duykhanh2401/image/upload/v1651681261/Blog/Screenshot_2022-05-04_232052_sgbjla.png)
