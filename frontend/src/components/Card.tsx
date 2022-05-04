@@ -40,7 +40,7 @@ const Card: React.FC<IProps> = ({ blog }) => {
 				<div className="post-container">
 					<div className="post-category">
 						<NavLink to={`/category/${categoryRender.slug}`}>
-							{categoryRender.name}
+							#{categoryRender.name}
 						</NavLink>
 					</div>
 					<div className="post-title">
@@ -48,7 +48,9 @@ const Card: React.FC<IProps> = ({ blog }) => {
 					</div>
 					<div className="post-info">
 						<div className="post-author">Duy Khánh</div>
-						<div className="post-published">43/01/2000</div>
+						<div className="post-published">
+							{new Date(blog.createdAt).toLocaleDateString('vi')}
+						</div>
 					</div>
 				</div>
 			</div>

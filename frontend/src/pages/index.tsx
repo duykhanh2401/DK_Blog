@@ -6,11 +6,14 @@ import Card from './../components/Card';
 const Index = () => {
 	const { blog } = useSelector((state: RootStore) => state);
 	return (
-		<div className="blog-posts">
-			{blog.map((el, index) => {
-				return <Card blog={el} key={index} />;
-			})}
-		</div>
+		<main>
+			<div className="blog-widget-title">Bài đăng mới nhất</div>
+			<div className="blog-posts">
+				{blog.map((el, index) => {
+					return <Card blog={el} key={index} />;
+				})}
+			</div>
+		</main>
 	);
 };
 

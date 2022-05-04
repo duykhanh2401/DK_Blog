@@ -8,6 +8,7 @@ import Card from './../../components/Card';
 import { useSelector, useDispatch } from 'react-redux';
 import { createBlog } from '../../redux/actions/blogAction';
 import { updateBlog } from './../../redux/actions/blogAction';
+import { UploadImage } from './../../utils/UploadImage';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 mdParser.use(require('markdown-it-ins'));
 
@@ -76,6 +77,13 @@ const CreateBlog: React.FC<IProps> = ({ id }) => {
 		dispatch(createBlog(newData, auth.accessToken));
 	};
 
+	const onImageUpload = (file: File) => {
+		return new Promise((resolve, reject) => {
+			UploadImage(file).then((response) => {
+				resolve(response);
+			});
+		});
+	};
 	return (
 		<div className="category-main">
 			<div className="category-header">
@@ -143,6 +151,7 @@ const CreateBlog: React.FC<IProps> = ({ id }) => {
 					renderHTML={(text) => mdParser.render(text)}
 					onChange={handleEditorChange}
 					value={value}
+					onImageUpload={onImageUpload}
 				/>
 			</div>
 			<button className="button-submit-category btn" onClick={handleSubmit}>

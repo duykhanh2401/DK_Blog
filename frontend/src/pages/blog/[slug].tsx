@@ -15,25 +15,27 @@ const BlogPage = () => {
 	if (!blogCurrent) return <NotFound />;
 	console.log(blogCurrent);
 	return (
-		<div className="main-bar">
-			<div className="post-content">
-				<div className="post-headline custom-html-style">
-					<h1 className="post-title">{blogCurrent.title}</h1>
-					<div className="img-container">
-						{typeof blogCurrent.thumbnail === 'string' && (
-							// <NavLink to={`/blog/${blog._id}`}>
-							<img src={blogCurrent.thumbnail} alt="" />
-						)}
+		<main>
+			<div className="main-bar">
+				<div className="post-content shadow">
+					<div className="post-headline custom-html-style">
+						<h1 className="post-title">{blogCurrent.title}</h1>
+						<div className="img-container">
+							{typeof blogCurrent.thumbnail === 'string' && (
+								// <NavLink to={`/blog/${blog._id}`}>
+								<img src={blogCurrent.thumbnail} alt="" />
+							)}
+						</div>
+						<div
+							className="post-body"
+							dangerouslySetInnerHTML={{
+								__html: mdParser.render(blogCurrent.content),
+							}}
+						></div>
 					</div>
-					<div
-						className="post-body"
-						dangerouslySetInnerHTML={{
-							__html: mdParser.render(blogCurrent.content),
-						}}
-					></div>
 				</div>
 			</div>
-		</div>
+		</main>
 	);
 };
 

@@ -18,3 +18,34 @@
 .body-right .post-title a {
 	color: var(--body-color);
 }
+
+.editor {
+	padding-top: 40px;
+}
+
+.item-list .slug,
+.item-list .name {
+	max-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.rc-md-editor .rc-md-navigation .button-wrap .button {
+	color: var(--text);
+}
+
+@media (max-width: 768px) {
+	.blog-body {
+		flex-direction: column;
+	}
+
+	.body-right .post-cart {
+		width: 100% !important;
+	}
+
+	.item-list .slug,
+	.item-list .name {
+		max-width: 100%;
+	}
+}

@@ -1,6 +1,6 @@
 .post-cart {
 	display: block;
-	background-color: var(--sidebar-color);
+	background-color: var(--primary);
 	margin: 0 0 20px;
 	padding: 10px 10px 15px;
 	border-radius: 8px;
@@ -86,21 +86,26 @@
 .post-container {
 }
 
-.post-category {
+.post-category a {
 	font-size: 11px;
 	line-height: 1.58em;
 	margin-bottom: 6px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	color: #005af0;
 }
 
-.post-title {
-	font-size: 92%;
+.post-title a {
+	font-size: 14px;
 	line-height: 1.62em;
 	margin: 0;
 	font-weight: 500;
-	color: var(--sidebar-text-color);
+	color: var(--text);
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
 }
 
 .post-info {

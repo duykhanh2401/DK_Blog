@@ -14,15 +14,18 @@
 
 :root {
 	/* ===== Colors ===== */
-	--body-color: #48525c;
-	--body-background: #fafafc;
 
-	--sidebar-color: #fefefe;
-	--sidebar-text-color: #161617;
 	--toggle-color: #ddd;
-	--sidebar-hover-color: #efefef;
-	--sidebar-hover-text-color: #1a1d1f;
 
+	--button-primary: #05f;
+	--background: #f5f5f5;
+	--text: #212529;
+	--primary: #fff;
+
+	--button-primary: #05f;
+	--button: #eee;
+	--button-text-primary: #fff;
+	--button-text: #343a40;
 	/* ====== Transition ====== */
 	--tran-03: all 0.2s ease;
 	--tran-03: all 0.3s ease;
@@ -32,19 +35,15 @@
 	--header-height: 3.5rem;
 }
 body.dark {
-	--body-color: #fefefe;
-	--body-background: #1e1e1e;
-
-	--sidebar-color: #2d2d30;
-	--sidebar-text-color: #fbfbfb;
+	--background: #1a2235;
+	--text: #ddd;
+	--primary: #293145;
 	--toggle-color: #fff;
-	--sidebar-hover-color: #272b30;
-	--sidebar-hover-text-color: #fcfcfc;
 }
 body {
 	min-height: 100vh;
-	background-color: var(--body-background);
-	color: var(--body-color);
+	background-color: var(--background);
+	color: var(--text);
 	transition: var(--tran-05);
 }
 .sidebar.close ~ .main {
@@ -54,6 +53,8 @@ body {
 .main {
 	padding: 70px 0 0 260px;
 	transition: all 0.3s ease;
+	background-color: var(--background);
+	min-height: 100vh;
 }
 
 @media screen and (max-width: 768px) {
@@ -67,6 +68,23 @@ body {
 	flex-wrap: wrap;
 	max-width: 1024px;
 	margin: 0 auto;
+}
+
+main {
+	max-width: 1024px;
+	margin: 0 auto;
+	padding: 30px 10px 50px;
+	border-radius: 5px;
+}
+
+.blog-widget-title {
+	margin-top: 10px;
+	padding: 20px 0;
+	font-size: 20px;
+	font-weight: 600;
+}
+.shadow {
+	box-shadow: 0 8px 30px rgb(0 0 0 / 5%) !important;
 }
 
 /* ------------------------------Login---------------------------------- */

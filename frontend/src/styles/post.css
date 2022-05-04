@@ -1,6 +1,7 @@
 .main-bar {
 	min-height: 100vh;
 	max-width: 1024px;
+	margin: 0 auto;
 }
 
 .post-content {
@@ -9,21 +10,48 @@
 .post-headline img {
 	max-height: 300px;
 	margin: 0 auto;
+	color: var(--text);
+}
+.post-headline {
+	padding: 20px 40px;
 }
 
 .post-title {
 	font-size: 27px;
 	margin: 0;
 	line-height: 1.3em;
+	color: var(--text);
 }
 
 .post-body {
 	font-size: 16px;
 	line-height: 1.65em;
-	color: var(--background-text);
+	color: var(--text);
 }
 
 .img-container {
 	display: flex;
 	align-items: center;
+}
+
+.section-container.html-wrap,
+.rc-md-navigation.visible,
+.rc-md-editor .editor-container .sec-md .input,
+.custom-html-style,
+.custom-html-style pre,
+.custom-html-style code {
+	background-color: var(--primary);
+	color: var(--text);
+}
+
+.custom-html-style pre,
+.custom-html-style code {
+	background-color: var(--background);
+	color: var(--text);
+}
+
+@media (max-width: 768px) {
+	.post-headline {
+		padding: 20px;
+	}
 }
