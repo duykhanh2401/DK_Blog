@@ -11,7 +11,7 @@ Dự án xây dựng website cá nhân với mục đích lưu trữ các bài v
 > - Sử dụng React Markdown-it
 > - Đang phát triển....
 
-## Demo https://blog.duykhanhdev.codes/
+## Demo https://blog.duykhanhdev.codes/ || https://lucifer.up.railway.app/
 
 ## Tác giả: Vũ Duy Khánh
 
