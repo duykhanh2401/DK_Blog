@@ -9,8 +9,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createBlog } from '../../redux/actions/blogAction';
 import { updateBlog } from './../../redux/actions/blogAction';
 import { UploadImage } from './../../utils/UploadImage';
+import hljs from 'highlight.js/lib/core';
+import javascript from 'highlight.js/lib/languages/javascript';
+import typescript from 'highlight.js/lib/languages/typescript';
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('typescript', typescript);
+
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 mdParser.use(require('markdown-it-ins'));
+mdParser.use(require('markdown-it-highlightjs'), { hljs });
 
 interface IProps {
 	id?: string;

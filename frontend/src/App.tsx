@@ -15,7 +15,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'react-markdown-editor-lite/lib/index.css';
 import { refreshToken } from './redux/actions/authAction';
 
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
 import './styles/index.css';
+
 import Alert from './components/alert/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategories } from './redux/actions/categoryAction';
